@@ -280,6 +280,12 @@ peso_roda_total = 3 * peso_roda
 # PESO TOTAL
 
 peso_vazio = peso_longarina + peso_nervuras + peso_fuselagem + peso_trem + peso_bequilha + peso_roda_total
-
-println("\nPeso vazio da aeronave: $(round(peso_vazio, digits=3)) kg")
+println("\nResumo Final:")
+println("Peso longarina: $peso_longarina kg")
+println("Peso nervuras: $peso_nervuras kg")
+println("Peso fuselagem: $peso_fuselagem kg")
+println("Peso trem de pouso: $peso_trem kg")
+println("Peso bequilha: $peso_bequilha kg")
+println("Peso rodas: $peso_roda_total kg")
+println("\nPeso vazio da aeronave: $peso_vazio kg")
 println("E o avião tem $(n_nervuras * 2) nervuras")
