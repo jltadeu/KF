@@ -38,9 +38,9 @@ end
 
 # CÁLCULOS LONGARINA
 
-volume_longarina_externo = pi * (diametro_longarina / 2)^2 * (envergadura_longarina / 1000) # volume maciço da longarina
-volume_longarina_interno = pi * ((diametro_longarina / 2) - espessura_longarina)^2 * (envergadura_longarina / 1000) # volume vazio da longarina
-volume_longarina = volume_longarina_externo - volume_longarina_interno # volume da longarina
+volume_longarina_externo = pi * (diametro_longarina / 2)^2 * (envergadura_longarina / 1000)
+volume_longarina_interno = pi * ((diametro_longarina / 2) - espessura_longarina)^2 * (envergadura_longarina / 1000)
+volume_longarina = volume_longarina_externo - volume_longarina_interno
 peso_longarina = volume_longarina * densidade_longarina
 
 
@@ -48,62 +48,63 @@ peso_longarina = volume_longarina * densidade_longarina
 
 println("\nPVNerv")
 
-envergadura_longarina = 1800 # mm
 envergadura_longarina_metros = envergadura_longarina / 1000
 
-println("Area Nervura Inicial (m2): ")
+println("Área da nervura inicial (m²): ")
 area_nervura_inicial = parse(Float64, readline())
 if area_nervura_inicial <= 0
-    println("Area inválida")
+    println("Área inválida")
     return
 end
 
-println("Corda Nervura inicial (m): ") 
+println("Corda nervura inicial (m): ")
 corda_asa_inicial = parse(Float64, readline())
 if corda_asa_inicial <= 0
     println("Corda inválida")
     return
 end
 
-println("Corda Nervura final (m): ")
-corda_asa_final = parse(Float64, readline())    
+println("Corda nervura final (m): ")
+corda_asa_final = parse(Float64, readline())
 if corda_asa_final <= 0
     println("Corda inválida")
     return
 end
 
-println("Espessura da nervura (m):  ")
+println("Espessura da nervura (m): ")
 espessura_nervura = parse(Float64, readline())
 if espessura_nervura <= 0
     println("Espessura inválida")
     return
 end
 
-println("Densidade da nervura (kg/m³):  ")
+println("Densidade da nervura (kg/m³): ")
 densidade_corda_asa = parse(Float64, readline())
 if densidade_corda_asa <= 0
     println("Densidade inválida")
     return
 end
 
-println("Espaçamento entre nervuras (m):  ")
+println("Espaçamento entre nervuras (m): ")
 espaco_nervura_asa = parse(Float64, readline())
 if espaco_nervura_asa <= 0 || espaco_nervura_asa > envergadura_longarina_metros
     println("Espaçamento inválido")
     return
 end
 
+# CÁLCULOS NERVURAS
+
 posicao_nervura = 0.0
 area_nervura_total = 0.0
-area_nervura = 0.0
-n_nervuras
+n_nervuras = 0
 
 while posicao_nervura < envergadura_longarina_metros
-    global posicao_nervura, area_nervura_total, area_nervura
     if posicao_nervura == 0.0
         area_nervura = area_nervura_inicial
     else
-        area_nervura = area_nervura_inicial * (1 - ((corda_asa_inicial - corda_asa_final) / ((envergadura_longarina_metros / 2) * corda_asa_final) * posicao_nervura))
+        area_nervura = area_nervura_inicial * (
+            1 - ((corda_asa_inicial - corda_asa_final) / ((envergadura_longarina_metros / 2) * corda_asa_final) * posicao_nervura)
+        )
     end
     area_nervura_total += area_nervura
     posicao_nervura += espessura_nervura + espaco_nervura_asa
@@ -112,6 +113,7 @@ end
 
 volume_nervura_total = area_nervura_total * espessura_nervura
 peso_nervuras = 2 * volume_nervura_total * densidade_corda_asa
+
 
 # ENTRADAS FUSELAGEM
 
@@ -179,7 +181,7 @@ end
 
 # CÁLCULOS FUSELAGEM
 
-comprimento_fuselagem = distancia_motor_cg / 0.20 # Estimamos que a distância do motor até o CG seja de 15%–25% (tira-se a média) do comprimento da fuselagem (em um avião triciclo).
+comprimento_fuselagem = distancia_motor_cg / 0.20
 volume_externo_fuselagem = comprimento_fuselagem * (altura_carga_paga + espessura_fuselagem) * (largura_carga_paga + espessura_fuselagem)
 
 if formato_carga_paga == 1
@@ -231,14 +233,14 @@ if comprimento_trem_pouso <= 0
     return
 end
 
-# CÁLCULOS TREM DE POUSO 
+# CÁLCULOS TREM DE POUSO
 
 h_tp = distancia_asa_chao - (altura_carga_paga + espessura_fuselagem)
-volume_trem = largura_trem_pouso * espessura_trem_pouso * comprimento_trem_pouso #tomando como se ele tivesse um formato retangular
+volume_trem = largura_trem_pouso * espessura_trem_pouso * comprimento_trem_pouso
 peso_trem = volume_trem * densidade_trem_pouso
 
 
-# ENTRADAS BEQUILHA 
+# ENTRADAS BEQUILHA
 
 println("Densidade da bequilha (kg/m³): ")
 densidade_bequilha = parse(Float64, readline())
@@ -254,14 +256,14 @@ if diametro_bequilha <= 0
     return
 end
 
-# CÁLCULO BEQUILHA
+# CÁLCULOS BEQUILHA
 
-h_bq = 0.55 * h_tp #pensando que a altura da bequilha é a altura do trem de pouso vezes um valor entre 0,4 e 0,7 (tira-se a média) 
-volume_bequilha = pi * (diametro_bequilha / 2)^2 * h_bq #pensando que a bequilha tem um formato cilíndrico
+h_bq = 0.55 * h_tp
+volume_bequilha = pi * (diametro_bequilha / 2)^2 * h_bq
 peso_bequilha = volume_bequilha * densidade_bequilha
 
 
-# ENTRADA RODAS
+# ENTRADAS RODAS
 
 println("Peso da roda (kg): ")
 peso_roda = parse(Float64, readline())
@@ -272,9 +274,12 @@ end
 
 # CÁLCULO RODAS
 
-peso_roda_total = 3 * peso_roda # 3 rodas pois tem a do trem de pouso e a bequilha
+peso_roda_total = 3 * peso_roda
 
 
-# Peso vazio da aeronave
+# PESO TOTAL
+
 peso_vazio = peso_longarina + peso_nervuras + peso_fuselagem + peso_trem + peso_bequilha + peso_roda_total
-println("\nPeso vazio  da aeronave: $peso_total kg\nE o avião tem $i*2 nervuras")
+
+println("\nPeso vazio da aeronave: $(round(peso_vazio, digits=3)) kg")
+println("E o avião tem $(n_nervuras * 2) nervuras")
