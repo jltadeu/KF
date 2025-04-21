@@ -140,8 +140,7 @@ end
 
 # CÁLCULOS FUSELAGEM
 
-comprimento_fuselagem = distancia_motor_cg / 0.25 # Estimamos que a distância do motor até o CG seja 25% do comprimento total da fuselagem.
-
+comprimento_fuselagem = distancia_motor_cg / 0.20 # Estimamos que a distância do motor até o CG seja de 15%–25% (tira-se a média) do comprimento da fuselagem.
 volume_externo = comprimento_fuselagem * (altura_carga_paga + espessura_fuselagem) * (largura_carga_paga + espessura_fuselagem)
 
 if formato_carga_paga == 1
@@ -237,4 +236,6 @@ end
 peso_roda_total = 3 * peso_roda # 3 rodas pois tem a do trem de pouso e a bequilha
 
 
-
+# Peso vazio da aeronave
+peso_vazio = peso_longarina + peso_nervuras + peso_fuselagem + peso_trem + peso_bequilha + peso_roda_total
+println("\nPeso vazio  da aeronave: $peso_total kg")
