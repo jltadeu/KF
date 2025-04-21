@@ -182,7 +182,7 @@ end
 # CÁLCULOS FUSELAGEM
 
 comprimento_fuselagem = distancia_motor_cg / 0.20
-volume_externo_fuselagem = comprimento_fuselagem * (altura_carga_paga + espessura_fuselagem) * (largura_carga_paga + espessura_fuselagem)
+volume_externo_fuselagem = comprimento_fuselagem * (altura_carga_paga + 2 * espessura_fuselagem) * (largura_carga_paga + 2 * espessura_fuselagem)
 
 if formato_carga_paga == 1
     volume_interno_fuselagem = pi * (diametro_carga_paga / 2)^2 * comprimento_fuselagem
