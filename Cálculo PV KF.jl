@@ -55,6 +55,13 @@ if corda_asa <= 0
     return
 end
 
+println("Area Nervura (m2):")
+area_nervura = parse(Float64, readline())
+if area_nervura <= 0
+    println("Area inválida")
+    return
+end
+
 println("Espessura da nervura (m): ")
 espessura_nervura = parse(Float64, readline())
 if espessura_nervura <= 0
@@ -79,7 +86,7 @@ end
 # CÁLCULOS NERVURA 
 
 n_nervuras = floor(Int, (envergadura_longarina / 1000) / espaco_nervura_asa) + 1
-volume_nervura_uma = corda_asa * espessura_nervura
+volume_nervura_uma = area_nervura * espessura_nervura
 peso_nervuras = n_nervuras * volume_nervura_uma * densidade_corda_asa
 
 
