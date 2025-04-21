@@ -29,9 +29,18 @@ if diametro_longarina <= 0
     return
 end
 
+println("Espessura da longarina (m): ")
+espessura_longarina = parse(Float64, readline())
+if espessura_longarina <= 0
+    println("Espessura inválida")
+    return
+end
+
 # CÁLCULOS LONGARINA
 
-volume_longarina = pi * (diametro_longarina / 2)^2 * envergadura_longarina / 1000  # convertendo mm para m
+volume_longarina_externo = pi * (diametro_longarina / 2)^2 * envergadura_longarina # volume maciço da longarina
+volume_longarina_interno = pi * ((diametro_longarina / 2) - espessura_longarina)^2 * envergadura_longarina # volume vazio da longarina
+volume_longarina = volume_longarina_externo - volume_longarina_interno # volume da longarina
 peso_longarina = volume_longarina * densidade_longarina
 
 
