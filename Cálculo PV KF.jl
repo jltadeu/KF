@@ -156,7 +156,7 @@ end
 
 # CÁLCULOS FUSELAGEM
 
-comprimento_fuselagem = distancia_motor_cg / 0.20 # Estimamos que a distância do motor até o CG seja de 15%–25% (tira-se a média) do comprimento da fuselagem.
+comprimento_fuselagem = distancia_motor_cg / 0.20 # Estimamos que a distância do motor até o CG seja de 15%–25% (tira-se a média) do comprimento da fuselagem (em um avião triciclo).
 volume_externo_fuselagem = comprimento_fuselagem * (altura_carga_paga + espessura_fuselagem) * (largura_carga_paga + espessura_fuselagem)
 
 if formato_carga_paga == 1
