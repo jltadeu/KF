@@ -96,6 +96,7 @@ end
 posicao_nervura = 0.0
 area_nervura_total = 0.0
 area_nervura = 0.0
+n_nervuras
 
 while posicao_nervura < envergadura_longarina_metros
     global posicao_nervura, area_nervura_total, area_nervura
@@ -106,6 +107,7 @@ while posicao_nervura < envergadura_longarina_metros
     end
     area_nervura_total += area_nervura
     posicao_nervura += espessura_nervura + espaco_nervura_asa
+    n_nervuras += 1
 end
 
 volume_nervura_total = area_nervura_total * espessura_nervura
@@ -275,4 +277,4 @@ peso_roda_total = 3 * peso_roda # 3 rodas pois tem a do trem de pouso e a bequil
 
 # Peso vazio da aeronave
 peso_vazio = peso_longarina + peso_nervuras + peso_fuselagem + peso_trem + peso_bequilha + peso_roda_total
-println("\nPeso vazio  da aeronave: $peso_total kg")
+println("\nPeso vazio  da aeronave: $peso_total kg\nE o avião tem $i*2 nervuras")
