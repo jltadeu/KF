@@ -48,44 +48,45 @@ peso_longarina = volume_longarina * densidade_longarina
 
 println("\nPVNerv")
 
+envergadura_longarina = 1800 # mm
 envergadura_longarina_metros = envergadura_longarina / 1000
 
-println("Área da nervura inicial (m²): ")
+println("Área da nervura inicial (m²):  ")
 area_nervura_inicial = parse(Float64, readline())
 if area_nervura_inicial <= 0
     println("Área inválida")
     return
 end
 
-println("Corda nervura inicial (m): ")
+println("Corda nervura inicial (m):  ")
 corda_asa_inicial = parse(Float64, readline())
 if corda_asa_inicial <= 0
     println("Corda inválida")
     return
 end
 
-println("Corda nervura final (m): ")
+println("Corda nervura final (m):  ")
 corda_asa_final = parse(Float64, readline())
 if corda_asa_final <= 0
     println("Corda inválida")
     return
 end
 
-println("Espessura da nervura (m): ")
+println("Espessura da nervura (m):  ")
 espessura_nervura = parse(Float64, readline())
 if espessura_nervura <= 0
     println("Espessura inválida")
     return
 end
 
-println("Densidade da nervura (kg/m³): ")
+println("Densidade da nervura (kg/m³):  ")
 densidade_corda_asa = parse(Float64, readline())
 if densidade_corda_asa <= 0
     println("Densidade inválida")
     return
 end
 
-println("Espaçamento entre nervuras (m): ")
+println("Espaçamento entre nervuras (m):  ")
 espaco_nervura_asa = parse(Float64, readline())
 if espaco_nervura_asa <= 0 || espaco_nervura_asa > envergadura_longarina_metros
     println("Espaçamento inválido")
@@ -94,11 +95,12 @@ end
 
 # CÁLCULOS NERVURAS
 
-posicao_nervura = 0.0
-area_nervura_total = 0.0
-n_nervuras = 0
+global posicao_nervura = 0.0
+global area_nervura_total = 0.0
+global n_nervuras = 0.0
 
 while posicao_nervura < envergadura_longarina_metros
+    global posicao_nervura, area_nervura_total, n_nervuras
     if posicao_nervura == 0.0
         area_nervura = area_nervura_inicial
     else
@@ -106,6 +108,7 @@ while posicao_nervura < envergadura_longarina_metros
             1 - ((corda_asa_inicial - corda_asa_final) / ((envergadura_longarina_metros / 2) * corda_asa_final) * posicao_nervura)^2
         )
     end
+    area_nervura = max(area_nervura, 0)  # Adicionando proteção contra valores negativos
     area_nervura_total += area_nervura
     posicao_nervura += espessura_nervura + espaco_nervura_asa
     n_nervuras += 1
@@ -113,6 +116,7 @@ end
 
 volume_nervura_total = area_nervura_total * espessura_nervura
 peso_nervuras = 2 * volume_nervura_total * densidade_corda_asa
+println("Peso nervura total:  $peso_nervuras kg")
 
 
 # ENTRADAS FUSELAGEM
