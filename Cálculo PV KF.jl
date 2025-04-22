@@ -115,8 +115,7 @@ while posicao_nervura < envergadura_longarina_metros
 end
 
 volume_nervura_total = area_nervura_total * espessura_nervura
-peso_nervuras = 2 * volume_nervura_total * densidade_corda_asa
-println("Peso nervura total:  $peso_nervuras kg")
+peso_nervuras = 2 * volume_nervura_total * densidade_corda_asa #pois calculamos somente de 1 asa
 
 
 # ENTRADAS FUSELAGEM
