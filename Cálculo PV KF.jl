@@ -38,9 +38,9 @@ end
 
 # CÁLCULOS LONGARINA
 
-volume_longarina_externo = pi * (diametro_longarina / 2)^2 * (envergadura_longarina / 1000)
-volume_longarina_interno = pi * ((diametro_longarina / 2) - espessura_longarina)^2 * (envergadura_longarina / 1000)
-volume_longarina = volume_longarina_externo - volume_longarina_interno
+volume_longarina_externo = pi * (diametro_longarina / 2)^2 * (envergadura_longarina / 1000) # volume maciço da longarina
+volume_longarina_interno = pi * ((diametro_longarina / 2) - espessura_longarina)^2 * (envergadura_longarina / 1000) # volume vazio da longarina
+volume_longarina = volume_longarina_externo - volume_longarina_interno # volume verdadeiro da longarina
 peso_longarina = volume_longarina * densidade_longarina
 
 
@@ -105,10 +105,10 @@ while posicao_nervura < envergadura_longarina_metros
         area_nervura = area_nervura_inicial
     else
         area_nervura = area_nervura_inicial * (
-            1 - ((corda_asa_inicial - corda_asa_final) / ((envergadura_longarina_metros / 2) * corda_asa_final) * posicao_nervura)^2
+            1 - ((corda_asa_inicial - corda_asa_final) / ((envergadura_longarina_metros / 2) * corda_asa_final) * posicao_nervura)^2 # juncao do calculo de variação de corda linear com calculo de area de uma nervura (uma constante vezes a corda ao quadrado)
         )
     end
-    area_nervura = max(area_nervura, 0)  # Adicionando proteção contra valores negativos
+    area_nervura = max(area_nervura, 0)  # Adicionando protecao contra valores negativos
     area_nervura_total += area_nervura
     posicao_nervura += espessura_nervura + espaco_nervura_asa
     n_nervuras += 1
@@ -185,7 +185,7 @@ end
 
 # CÁLCULOS FUSELAGEM
 
-comprimento_fuselagem = distancia_motor_cg / 0.20
+comprimento_fuselagem = distancia_motor_cg / 0.20 # Estimamos que a distância do motor até o CG seja de 15%–25% (tira-se a média) do comprimento da fuselagem (em um avião triciclo).
 volume_externo_fuselagem = comprimento_fuselagem * (altura_carga_paga + 2 * espessura_fuselagem) * (largura_carga_paga + 2 * espessura_fuselagem)
 
 if formato_carga_paga == 1
@@ -240,7 +240,7 @@ end
 # CÁLCULOS TREM DE POUSO
 
 h_tp = distancia_asa_chao - (altura_carga_paga + espessura_fuselagem)
-volume_trem = largura_trem_pouso * espessura_trem_pouso * comprimento_trem_pouso
+volume_trem = largura_trem_pouso * espessura_trem_pouso * comprimento_trem_pouso #tomando como se ele tivesse um formato retangular
 peso_trem = volume_trem * densidade_trem_pouso
 
 
@@ -262,8 +262,8 @@ end
 
 # CÁLCULOS BEQUILHA
 
-h_bq = 0.55 * h_tp
-volume_bequilha = pi * (diametro_bequilha / 2)^2 * h_bq
+h_bq = 0.55 * h_tp #pensando que a altura da bequilha é a altura do trem de pouso vezes um valor entre 0,4 e 0,7 (tira-se a média) 
+volume_bequilha = pi * (diametro_bequilha / 2)^2 * h_bq #pensando que a bequilha tem um formato cilíndrico
 peso_bequilha = volume_bequilha * densidade_bequilha
 
 
@@ -278,7 +278,7 @@ end
 
 # CÁLCULO RODAS
 
-peso_roda_total = 3 * peso_roda
+peso_roda_total = 3 * peso_roda #pois são 3 rodas
 
 
 # PESO TOTAL
