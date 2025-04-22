@@ -277,9 +277,207 @@ end
 peso_roda_total = 3 * peso_roda
 
 
+# ENTRADAS TAILBOOM
+
+println("\nPVATB")
+
+println("Distância da asa até a empenagem (m): ")
+distancia_asa_empenagem = parse(Float64, readline())
+if distancia_asa_empenagem <= 0
+    println("Distância inválida")
+    return
+end
+
+println("Densidade do tailboom (kg/m³): ")
+densidade_tailboom = parse(Float64, readline())
+if densidade_tailboom <= 0
+    println("Densidade inválida")
+    return
+end
+
+println("Diâmetro externo do tailboom (m): ")
+diametro_tailboom = parse(Float64, readline())
+if diametro_tailboom <= 0
+    println("Diâmetro inválido")
+    return
+end
+
+println("Espessura do tailboom (m): ")
+espessura_tailboom = parse(Float64, readline())
+if espessura_tailboom <= 0
+    println("Espessura inválida")
+    return
+end
+
+# CÁLCULOS TAILBOOM
+
+volume_tailboom_externo = pi * (diametro_tailboom / 2)^2 * distancia_asa_empenagem
+volume_tailboom_interno = pi * ((diametro_tailboom / 2) - espessura_tailboom)^2 * distancia_asa_empenagem
+volume_tailboom = volume_tailboom_externo - volume_tailboom_interno
+peso_tailboom = volume_tailboom * densidade_tailboom
+
+# EMPENAGEM HORIZONTAL
+
+println("\nPVEH")
+
+println("Envergadura da empenagem horizontal (mm): ")
+envergadura_empenagem_h = parse(Float64, readline())
+if envergadura_empenagem_h <= 0
+    println("Envergadura inválida")
+    return
+end
+
+println("Densidade do material da longarina da empenagem horizontal (kg/m³): ")
+densidade_longarina_h = parse(Float64, readline())
+if densidade_longarina_h <= 0
+    println("Densidade inválida")
+    return
+end
+
+println("Diâmetro da longarina da empenagem horizontal (m): ")
+diametro_longarina_h = parse(Float64, readline())
+if diametro_longarina_h <= 0
+    println("Diâmetro inválido")
+    return
+end
+
+println("Espessura da longarina da empenagem horizontal (m): ")
+espessura_longarina_h = parse(Float64, readline())
+if espessura_longarina_h <= 0
+    println("Espessura inválida")
+    return
+end
+
+# Cálculo do peso da longarina da empenagem horizontal
+volume_longarina_ext_h = pi * (diametro_longarina_h / 2)^2 * (envergadura_empenagem_h / 1000)
+volume_longarina_int_h = pi * ((diametro_longarina_h / 2) - espessura_longarina_h)^2 * (envergadura_empenagem_h / 1000)
+volume_longarina_h = volume_longarina_ext_h - volume_longarina_int_h
+peso_longarina_h = volume_longarina_h * densidade_longarina_h
+
+# NERVURAS DA EMPENAGEM HORIZONTAL
+println("Corda da empenagem horizontal (m): ")
+corda_h = parse(Float64, readline())
+if corda_h <= 0
+    println("Corda inválida")
+    return
+end
+
+println("Área da nervura da empenagem horizontal (m²): ")
+area_nervura_h = parse(Float64, readline())
+if area_nervura_h <= 0
+    println("Área inválida")
+    return
+end
+
+println("Espessura da nervura da empenagem horizontal (m): ")
+espessura_nervura_h = parse(Float64, readline())
+if espessura_nervura_h <= 0
+    println("Espessura inválida")
+    return
+end
+
+println("Densidade da nervura da empenagem horizontal (kg/m³): ")
+densidade_nervura_h = parse(Float64, readline())
+if densidade_nervura_h <= 0
+    println("Densidade inválida")
+    return
+end
+
+println("Espaçamento entre nervuras da empenagem horizontal (m): ")
+espaco_nervura_h = parse(Float64, readline())
+if espaco_nervura_h <= 0 || espaco_nervura_h > (envergadura_empenagem_h / 1000)
+    println("Espaçamento inválido")
+    return
+end
+
+n_nervuras_h = floor(Int, (envergadura_empenagem_h / 1000) / espaco_nervura_h) + 1
+volume_nervura_uma_h = area_nervura_h * espessura_nervura_h
+peso_nervuras_h = n_nervuras_h * volume_nervura_uma_h * densidade_nervura_h
+
+
+# EMPENAGEM VERTICAL
+
+println("\nPVEV")
+
+println("Altura da empenagem vertical (mm): ")
+altura_empenagem_v = parse(Float64, readline())
+if altura_empenagem_v <= 0
+    println("Altura inválida")
+    return
+end
+
+println("Densidade do material da longarina da empenagem vertical (kg/m³): ")
+densidade_longarina_v = parse(Float64, readline())
+if densidade_longarina_v <= 0
+    println("Densidade inválida")
+    return
+end
+
+println("Diâmetro da longarina da empenagem vertical (m): ")
+diametro_longarina_v = parse(Float64, readline())
+if diametro_longarina_v <= 0
+    println("Diâmetro inválido")
+    return
+end
+
+println("Espessura da longarina da empenagem vertical (m): ")
+espessura_longarina_v = parse(Float64, readline())
+if espessura_longarina_v <= 0
+    println("Espessura inválida")
+    return
+end
+
+# Cálculo do peso da longarina da empenagem vertical
+volume_longarina_ext_v = pi * (diametro_longarina_v / 2)^2 * (altura_empenagem_v / 1000)
+volume_longarina_int_v = pi * ((diametro_longarina_v / 2) - espessura_longarina_v)^2 * (altura_empenagem_v / 1000)
+volume_longarina_v = volume_longarina_ext_v - volume_longarina_int_v
+peso_longarina_v = volume_longarina_v * densidade_longarina_v
+
+# NERVURAS DA EMPENAGEM VERTICAL
+println("Corda da empenagem vertical (m): ")
+corda_v = parse(Float64, readline())
+if corda_v <= 0
+    println("Corda inválida")
+    return
+end
+
+println("Área da nervura da empenagem vertical (m²): ")
+area_nervura_v = parse(Float64, readline())
+if area_nervura_v <= 0
+    println("Área inválida")
+    return
+end
+
+println("Espessura da nervura da empenagem vertical (m): ")
+espessura_nervura_v = parse(Float64, readline())
+if espessura_nervura_v <= 0
+    println("Espessura inválida")
+    return
+end
+
+println("Densidade da nervura da empenagem vertical (kg/m³): ")
+densidade_nervura_v = parse(Float64, readline())
+if densidade_nervura_v <= 0
+    println("Densidade inválida")
+    return
+end
+
+println("Espaçamento entre nervuras da empenagem vertical (m): ")
+espaco_nervura_v = parse(Float64, readline())
+if espaco_nervura_v <= 0 || espaco_nervura_v > (altura_empenagem_v / 1000)
+    println("Espaçamento inválido")
+    return
+end
+
+n_nervuras_v = floor(Int, (altura_empenagem_v / 1000) / espaco_nervura_v) + 1
+volume_nervura_uma_v = area_nervura_v * espessura_nervura_v
+peso_nervuras_v = n_nervuras_v * volume_nervura_uma_v * densidade_nervura_v
+
+
+
 # PESO TOTAL
 
-peso_vazio = peso_longarina + peso_nervuras + peso_fuselagem + peso_trem + peso_bequilha + peso_roda_total
+peso_vazio = peso_longarina + peso_nervuras + peso_fuselagem + peso_trem + peso_bequilha + peso_roda_total + peso_longarina_h + peso_nervuras_h + peso_longarina_v + peso_nervuras_v + peso_tailboom
 
 println("\nResumo Final:")
 println("Peso longarina: $peso_longarina kg")
@@ -288,5 +486,10 @@ println("Peso fuselagem: $peso_fuselagem kg")
 println("Peso trem de pouso: $peso_trem kg")
 println("Peso bequilha: $peso_bequilha kg")
 println("Peso rodas: $peso_roda_total kg")
+println("Peso tailboom: $peso_tailboom kg")
+println("Peso  longarina da empenagem horizontal: $peso_longarina_h kg")
+println("Peso  nervuras da empenagem horizontal: $peso_nervuras_h kg")
+println("Peso  longarina da empenagem vertical: $peso_longarina_v kg")
+println("Peso  nervuras da empenagem vertical: $peso_nervuras_v kg")
 println("\nPeso vazio da aeronave: $peso_vazio kg")
 println("E o avião tem $(n_nervuras * 2) nervuras")
