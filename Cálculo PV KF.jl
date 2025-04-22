@@ -103,7 +103,7 @@ while posicao_nervura < envergadura_longarina_metros
         area_nervura = area_nervura_inicial
     else
         area_nervura = area_nervura_inicial * (
-            1 - ((corda_asa_inicial - corda_asa_final) / ((envergadura_longarina_metros / 2) * corda_asa_final) * posicao_nervura)
+            1 - ((corda_asa_inicial - corda_asa_final) / ((envergadura_longarina_metros / 2) * corda_asa_final) * posicao_nervura)^2
         )
     end
     area_nervura_total += area_nervura
@@ -280,6 +280,7 @@ peso_roda_total = 3 * peso_roda
 # PESO TOTAL
 
 peso_vazio = peso_longarina + peso_nervuras + peso_fuselagem + peso_trem + peso_bequilha + peso_roda_total
+
 println("\nResumo Final:")
 println("Peso longarina: $peso_longarina kg")
 println("Peso nervuras: $peso_nervuras kg")
